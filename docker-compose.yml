@@ -74,6 +74,7 @@ services:
   file-server:
     container_name: polis-file-server
     image: docker.io/compdem/polis-file-server:${TAG}
+    env_file: ./.universal.env
     build:
       context: ./
       dockerfile: file-server/Dockerfile

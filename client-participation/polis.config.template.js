@@ -1,24 +1,20 @@
 module.exports = {
   domainWhitelist: [
-    // local ports
     "^localhost$",
     "^127\\.0\\.0\\.1$",
     "^192\\.168\\.1\\.140$",
-    // sample configuration for main pol.is deployment
-    "^pol\\.is",
-    ".+\\.pol\\.is$",
-    // These allow for local ip routing for remote dev deployment
-    "^(n|ssl)ip\\.io$",
-    ".+\\.(n|ssl)ip\\.io$",
+    "^notabot\\.me",
+    "polis\\.notabot\\.me",
+    ".+\\.notabot\\.me$",
   ],
 
   // Point to a polisServer instance (local recommended for dev)
   //SERVICE_URL: "http://localhost:5000", // local server; recommended for dev
-  SERVICE_URL: "http:localhost:5000",
+  SERVICE_URL: "https://polis.notabot.me:5000",
 
   // Used for setting appropriate hostname for embedding.
   //SERVICE_HOSTNAME: "123.45.67.89.sslip.io",
-  SERVICE_HOSTNAME: "localhost",
+  SERVICE_HOSTNAME: "polis.notabot.me",
 
   // Note that this must match the participation client port specified in polisServer instance
   PORT: 5001,

@@ -29,7 +29,7 @@
       path.push("demo");
     }
     path.push(o.conversation_id);
-    iframe.src = "https://embed.pol.is/"+ path.join("/");
+    iframe.src = "https://polis.notabot.me/"+ path.join("/");
     iframe.width = "100%"; // may be constrained by parent div
     iframe.height = o.height || 900;
     iframe.style.border = "1px solid #ccc";
@@ -51,13 +51,13 @@
   if (firstRun) {
     window.addEventListener("message", function(event) {
   
-      if (!event.origin.match(/pol.is$/)) {
+      if (!event.origin.match(/polis.notabot.me$/)) {
         return;
       } 
     
       if (event.data === "cookieRedirect" && cookiesEnabledAtTopLevel()) {
         // temporarily redirect to polis, which will set a cookie and redirect back
-        window.location = "https://embed.pol.is/api/v3/launchPrep?dest=" + encodeReturnUrl(window.location+"");
+        window.location = "https://polis.notabot.me/api/v3/launchPrep?dest=" + encodeReturnUrl(window.location+"");
       }
     }, false);
   }

@@ -2,16 +2,12 @@
 module.exports = {
 
   domainWhitelist: [
-    // local ports
     "^localhost$",
     "^127\\.0\\.0\\.1$",
     "^192\\.168\\.1\\.140$",
-    // sample configuration for main pol.is deployment
-    "^pol\\.is",
-    ".+\\.pol\\.is$",
-    // These allow for local ip routing for remote dev deployment
-    "^(n|ssl)ip\\.io$",
-    ".+\\.(n|ssl)ip\\.io$",
+    "^notabot\\.me",
+    "polis\\.notabot\\.me",
+    ".+\\.notabot\\.me$",
   ],
 
   DISABLE_INTERCOM: true,
@@ -20,7 +16,7 @@ module.exports = {
   FB_APP_ID: '661042417336977',
 
   //SERVICE_URL: 'http://localhost:5000',
-  SERVICE_URL: 'https://preprod.pol.is',
+  SERVICE_URL: 'https://polis.notabot.me',
 
   UPLOADER: 'local', // alt: s3, scp
 

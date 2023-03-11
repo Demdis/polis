@@ -3,7 +3,7 @@
   var firstRun = !window.polis._hasRun;
   polis._hasRun = 1;
   var iframes = [];
-  var polisUrl = "https://<%= polisHostName %>";
+  var polisUrl = "https://polis.notabot.me";
   var maxHeightsSeen = {};
 
   polis.on = polis.on || {};
