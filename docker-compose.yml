@@ -17,8 +17,9 @@ version: "3.4"
 
 services:
   server:
+    container_name: polis-server
     env_file: ./server/docker-dev.env
-    image: docker.io/compdem/polis-server:${TAG}
+    image: demdis/server:prod
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -27,13 +28,13 @@ services:
       - "file-server"
     networks:
       - "polis-net"
-    # Scale the server container to a given number of instances.
-    scale: 1
+    ports:
+      - "5001:5001"
 
   math:
     container_name: polis-math
     env_file: ./math/docker-dev.env
-    image: docker.io/compdem/polis-math:${TAG}
+    image: demdis/math:prod
     depends_on:
       - "postgres"
     build:
@@ -44,20 +45,22 @@ services:
   postgres:
     container_name: polis-postgres
     env_file: ./server/docker-db-dev.env
-    image: docker.io/compdem/polis-postgres:${TAG}
+    image: demdis/db:prod
     restart: always
     build:
       context: ./server
       dockerfile: Dockerfile-db
     networks:
       - "polis-net"
+    ports:
+      - "6543:5432"
     volumes:
       - "backups:/backups"
       - "postgres:/var/lib/postgresql/data"
 
   nginx-proxy:
     container_name: polis-nginx-proxy
-    image: docker.io/compdem/polis-nginx-proxy:${TAG}
+    image: demdis/nginx:prod
     build:
       context: ./file-server
       dockerfile: nginx.Dockerfile
@@ -73,7 +76,7 @@ services:
 
   file-server:
     container_name: polis-file-server
-    image: docker.io/compdem/polis-file-server:${TAG}
+    image: demdis/file-server:prod
     env_file: ./.universal.env
     build:
       context: ./
@@ -82,6 +85,8 @@ services:
         GIT_HASH: "${GIT_HASH}"
     networks:
       - "polis-net"
+    ports:
+      - "8080:8080"
 
 networks:
   polis-net:
