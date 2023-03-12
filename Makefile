@@ -6,16 +6,16 @@ include .env
 export $(shell sed 's/=.*//' .env)
 
 pull: ## Pull most recent Docker container builds (nightlies)
-	docker-compose pull
+	docker compose pull
 
 down:
-	docker-compose down
+	docker compose down
 
 start: ## Start all Docker containers
-	docker-compose up --detach
+	docker compose up --detach
 
 start-rebuild: ## Start all Docker containers, [re]building as needed
-	docker-compose up --detach --build
+	docker compose up --detach --build
 
 # Helpful CLI shortcuts
 rbs: start-rebuild
