@@ -58,14 +58,11 @@ services:
       - "backups:/backups"
       - "postgres:/var/lib/postgresql/data"
 
-  nginx-proxy:
-    container_name: polis-nginx-proxy
-    image: demdis/nginx:prod
-    build:
-      context: ./file-server
-      dockerfile: nginx.Dockerfile
-    environment:
-      - TAG
+  caddy:
+    container_name: caddy:2-alpine
+    image: demdis/caddy:prod
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
     depends_on:
       - "server"
     networks:
