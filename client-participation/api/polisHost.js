@@ -29,7 +29,7 @@
       path.push("demo");
     }
     path.push(o.conversation_id);
-    iframe.src = "https://polis.notabot.me/"+ path.join("/");
+    iframe.src = "https://staging.polis.demdis.sk/"+ path.join("/");
     iframe.width = "100%"; // may be constrained by parent div
     iframe.height = o.height || 900;
     iframe.style.border = "1px solid #ccc";
@@ -50,14 +50,14 @@
 
   if (firstRun) {
     window.addEventListener("message", function(event) {
-  
-      if (!event.origin.match(/polis.notabot.me$/)) {
+
+      if (!event.origin.match(/staging.polis.demdis.sk$/)) {
         return;
       }
 
       if (event.data === "cookieRedirect" && cookiesEnabledAtTopLevel()) {
         // temporarily redirect to polis, which will set a cookie and redirect back
-        window.location = "https://polis.notabot.me/api/v3/launchPrep?dest=" + encodeReturnUrl(window.location+"");
+        window.location = "https://staging.polis.demdis.sk/api/v3/launchPrep?dest=" + encodeReturnUrl(window.location+"");
       }
     }, false);
   }

@@ -5,9 +5,11 @@ module.exports = {
     "^localhost$",
     "^127\\.0\\.0\\.1$",
     "^192\\.168\\.1\\.140$",
-    "^notabot\\.me",
-    "polis\\.notabot\\.me",
-    ".+\\.notabot\\.me$",
+    "^polis\\.demdis\\.sk",
+    "polis\\.demdis\\.sk",
+    "^staging\\.polis\\.demdis\\.sk",
+    "staging\\.polis\\.demdis\\.sk",
+    ".+\\.polis\\.demdis\\.sk$",
   ],
 
   DISABLE_INTERCOM: true,
@@ -16,7 +18,7 @@ module.exports = {
   FB_APP_ID: '661042417336977',
 
   //SERVICE_URL: 'http://localhost:5000',
-  SERVICE_URL: 'https://polis.notabot.me',
+  SERVICE_URL: 'https://staging.polis.demdis.sk',
 
   UPLOADER: 'local', // alt: s3, scp
 

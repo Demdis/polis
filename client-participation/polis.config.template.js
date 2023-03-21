@@ -3,18 +3,20 @@ module.exports = {
     "^localhost$",
     "^127\\.0\\.0\\.1$",
     "^192\\.168\\.1\\.140$",
-    "^notabot\\.me",
-    "polis\\.notabot\\.me",
-    ".+\\.notabot\\.me$",
+    "^polis\\.demdis\\.sk",
+    "polis\\.demdis\\.sk",
+    "^staging\\.polis\\.demdis\\.sk",
+    "staging\\.polis\\.demdis\\.sk",
+    ".+\\.polis\\.demdis\\.sk$",
   ],
 
   // Point to a polisServer instance (local recommended for dev)
   //SERVICE_URL: "http://localhost:5000", // local server; recommended for dev
-  SERVICE_URL: "https://polis.notabot.me:5000",
+  SERVICE_URL: "https://staging.polis.demdis.sk:5000",
 
   // Used for setting appropriate hostname for embedding.
   //SERVICE_HOSTNAME: "123.45.67.89.sslip.io",
-  SERVICE_HOSTNAME: "polis.notabot.me",
+  SERVICE_HOSTNAME: "staging.polis.demdis.sk",
 
   // Note that this must match the participation client port specified in polisServer instance
   PORT: 5001,
