@@ -5,15 +5,18 @@ module.exports = {
     "^127\\.0\\.0\\.1$",
     "^192\\.168\\.1\\.140$",
     // sample configuration for main pol.is deployment
-    "^pol\\.is",
-    ".+\\.pol\\.is$",
+    "^polis\\.demdis\\.sk",
+    "polis\\.demdis\\.sk",
+    "^staging\\.polis\\.demdis\\.sk",
+    "staging\\.polis\\.demdis\\.sk",
+    ".+\\.polis\\.demdis\\.sk$",
     // These allow for local ip routing for remote dev deployment
     "^(n|ssl)ip\\.io$",
     ".+\\.(n|ssl)ip\\.io$",
   ],
 
   //SERVICE_URL: 'http://localhost:5000',
-  SERVICE_URL: 'https://staging.polis.demdis.sk',
+  SERVICE_URL: 'https://polis.demdis.sk',
 
   UPLOADER: 'local', // alt: s3, scp
 
