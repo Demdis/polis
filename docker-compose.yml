@@ -19,6 +19,8 @@ services:
   server:
     container_name: polis-server
     env_file: ./server/docker-dev.env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
     image: demdis/server:prod
     build:
       context: ./server
@@ -34,6 +36,8 @@ services:
   math:
     container_name: polis-math
     env_file: ./math/docker-dev.env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
     image: demdis/math:prod
     depends_on:
       - "postgres"
@@ -74,7 +78,7 @@ services:
   file-server:
     container_name: polis-file-server
     image: demdis/file-server:prod
-    env_file: ./.universal.env
+    env_file: ./.env
     build:
       context: ./
       dockerfile: file-server/Dockerfile
