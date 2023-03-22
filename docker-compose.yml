@@ -59,8 +59,8 @@ services:
       - "postgres:/var/lib/postgresql/data"
 
   caddy:
-    container_name: caddy:2-alpine
-    image: demdis/caddy:prod
+    container_name: polis-caddy
+    image: caddy:2-alpine
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
     depends_on:
