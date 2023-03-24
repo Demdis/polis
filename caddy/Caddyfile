@@ -7,9 +7,9 @@
 	# acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
 }
 
-polis.demdis.sk {
+{$PRIMARY_POLIS_URL} {
 	reverse_proxy server:5000
 }
-www.polis.demdis.sk {
-	redir https://polis.demdis.sk{uri}
+www.{$PRIMARY_POLIS_URL} {
+	redir https://{$PRIMARY_POLIS_URL}{uri}
 }
