@@ -70,6 +70,7 @@ services:
     image: caddy:2-alpine
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - certificates:/data/caddy
     depends_on:
       - "server"
     networks:
@@ -98,3 +99,4 @@ networks:
 volumes:
   backups:
   postgres:
+  certificates:
