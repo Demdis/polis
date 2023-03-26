@@ -3,7 +3,7 @@
   var firstRun = !window.polis._hasRun;
   polis._hasRun = 1;
   var iframes = [];
-  var polisUrl = "https://polis.demdis.sk";
+  var polisUrl = "https://staging.polis.demdis.sk";
   var maxHeightsSeen = {};
 
   polis.on = polis.on || {};
