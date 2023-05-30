@@ -63,7 +63,7 @@
     "gulp-cli": "^1.4.0",
     "gulp-compile-handlebars": "~0.2.0",
     "gulp-concat": "~2.1.7",
-    "gulp-connect": "~0.3.0",
+    "gulp-connect": "~5.7.0",
     "gulp-gzip": "0.0.4",
     "gulp-handlebars": "~1.0.2",
     "gulp-header": "~1.0.2",
