@@ -33,7 +33,6 @@ services:
       - "polis-net"
     ports:
       - "5001:5001"
-      - "5000:5000"
 
   math:
     container_name: polis-math
