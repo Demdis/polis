@@ -5,32 +5,33 @@ E2E_RUN = cd e2e; CYPRESS_BASE_URL=$(BASEURL)
 include .env
 export $(shell sed 's/=.*//' .env)
 
-pull: ## Pull most recent Docker container builds (nightlies)
-	docker compose pull
+.PHONY: help
+
+help:  ## Show this help
+	@awk 'BEGIN {FS = ":.*##"; printf "Usage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+prod: ## Start all Docker containers
+	@docker compose up --detach
+
+dev: ## Start all Docker containers
+	@docker compose -f docker-compose.dev.yml up --detach
 
 down:
-	docker compose down
+	@docker compose down
 
-start: ## Start all Docker containers
-	docker compose up --detach
+restart:  ## Restart containers
+	@docker compose restart
 
 start-rebuild: ## Start all Docker containers, [re]building as needed
-	docker compose up --detach --build
+	@docker compose up --detach --build
 
-# Helpful CLI shortcuts
-rbs: start-rebuild
+logs:  ## Show logs
+	@docker compose logs -f
 
+ps: ## Show status of containers
+	@docker ps
 
 %:
 	@true
-
-.PHONY: help
-
-help:
-	@echo 'Usage: make <command>'
-	@echo
-	@echo 'where <command> is one of the following:'
-	@echo
-	@grep -E '^[a-z0-9A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 .DEFAULT_GOAL := help
