@@ -71,8 +71,10 @@ services:
   caddy:
     container_name: polis-caddy
     image: caddy:2-alpine
+    environment:
+      PRIMARY_POLIS_URL: ${PRIMARY_POLIS_URL}
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/Caddyfile.dev:/etc/caddy/Caddyfile
       - certificates:/data/caddy
     depends_on:
       - "server"
