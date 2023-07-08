@@ -18,38 +18,6 @@
 
     "> {{! protips column }}
 
-  <p
-    style="{{#unless desktop}}font-size:12px;{{/unless}}"
-    >
-      {{!-- present all hints to screen reader --}}
-
-      {{#if hideHelp}}
-        {{!-- even if help text is hidden, still screen read the main comment box label/prompt --}}
-        <label for="comment_form_textarea"
-               style="display:none;">
-          {{{s.writeCommentHelpText}}}
-        </label>
-      {{else}}
-        <label for="comment_form_textarea"
-               style="display:block;">
-          {{{s.writeCommentHelpText}}}
-        </label>
-        <p>
-          {{{s.helpWriteListIntro}}}
-        </p>
-        <ul>
-          <li>{{{s.helpWriteListStandalone}}}</li>
-          <li>{{{s.helpWriteListRaisNew}}}</li>
-          <li>{{{s.helpWriteListShort}}}</li>
-        </ul>
-        <label for="comment_form_textarea" style="display:block">
-          {{{s.tipCommentsRandom}}}
-        </label>
-      {{/if}}
-
-      {{!-- end screen-reader-text --}}
-  </p>
-
   {{!-- present all hints to screen reader --}}
   <div class="screen-reader-text">
     <h2>{{s.commentWritingTipsHintsHeader}}</h2>
