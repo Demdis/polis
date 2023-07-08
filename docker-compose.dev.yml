@@ -22,6 +22,7 @@ services:
     environment:
       - DATABASE_URL=${DATABASE_URL}
     image: demdis/server:dev
+    restart: always
     build:
       context: ./server
       dockerfile: Dockerfile.dev
@@ -63,7 +64,7 @@ services:
     networks:
       - "polis-net"
     ports:
-      - "6543:5432"
+      - "${EXTERNAL_POSTGRES_PORT}:5432"
     volumes:
       - "backups:/backups"
       - "postgres:/var/lib/postgresql/data"
