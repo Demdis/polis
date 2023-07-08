@@ -1,44 +1,105 @@
-version: "3.4"
+# before running docker-compose up for the first time,
+# either do a pull:
+# docker-compose pull
+# or do a build:
+# GIT_HASH $(git rev-parse --short HEAD) docker-compose up --detach
 
-# Questions/todo:
-# * Do we want to use different tags for dev vs prod builds? how is this controlled?
-# * Definitely want to have different env var files for prod vs dev
+# subsequently you should only need to run:
+# docker-compose up --detach
+
+# force a full re-build with no cache from previous builds:
+# docker-compose build --build-arg GIT_HASH $(git rev-parse --short HEAD) --parallel --no-cache
+
+# to stop:
+# docker-compose down
+
+version: "3.4"
 
 services:
   server:
+    container_name: polis-server
+    env_file: ./server/docker-dev.env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    image: demdis/server:dev
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - "postgres"
+      - "file-server"
     command: npm run dev
-    environment:
-      NODE_ENV: development
-    # Is this what we'll want here?
-    #command: npm run build:watch && npm run serve
     volumes:
-      - "./server:/app"
-    ports:
-      - "9229:9229"
-
-  math:
-    command: clojure -X:dev-poller
-    volumes:
-      - "./math:/app"
-    ports:
-      # nrepl port
-      - 18975:18975
-    environment:
-      CHOKIDAR_USEPOLLING: "true"
-
-  maildev:
-    image: docker.io/maildev/maildev:1.1.0
+      - ./server:/app
     networks:
       - "polis-net"
     ports:
-      # User interface
-      - "1080:80"
-      # SMTP port
-      - "25:25"
+      - "5001:5001"
 
-  # TODO: Add individual entries for each of the clients, with hot-code reloading set up
-  # Either:
-  #   * configure environment variables here so that the ports the server points to for these assets are the
-  #     live-code-reloaded ports
-  #   * leave the server pointing to the static builds, but have separate ports you can hit for the live-code
-  #     reloading (making sure to document the process)
+  math:
+    container_name: polis-math
+    env_file: ./math/docker-dev.env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    image: demdis/math:dev
+    depends_on:
+      - "postgres"
+    build:
+      context: ./math
+    networks:
+      - "polis-net"
+
+  postgres:
+    container_name: polis-postgres
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+    image: demdis/db:dev
+    restart: always
+    build:
+      context: ./server
+      dockerfile: Dockerfile-db
+    networks:
+      - "polis-net"
+    ports:
+      - "6543:5432"
+    volumes:
+      - "backups:/backups"
+      - "postgres:/var/lib/postgresql/data"
+
+  caddy:
+    container_name: polis-caddy
+    image: caddy:2-alpine
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - certificates:/data/caddy
+    depends_on:
+      - "server"
+    networks:
+      - "polis-net"
+    ports:
+      - "80:80"
+      - "443:443"
+
+  file-server:
+    container_name: polis-file-server
+    image: demdis/file-server:dev
+    env_file: ./.env
+    build:
+      context: ./
+      dockerfile: file-server/Dockerfile
+      args:
+        GIT_HASH: "${GIT_HASH}"
+    networks:
+      - "polis-net"
+    ports:
+      - "8080:8080"
+
+networks:
+  polis-net:
+
+volumes:
+  backups:
+  postgres:
+  certificates:

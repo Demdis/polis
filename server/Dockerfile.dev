@@ -1,0 +1,8 @@
+FROM docker.io/node:14.14.0-alpine
+
+WORKDIR /app
+
+RUN apk add postgresql-dev python-dev build-base
+
+RUN apk add --no-cache --virtual .build \
+  g++ git make python
