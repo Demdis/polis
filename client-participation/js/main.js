@@ -72,7 +72,7 @@ function getHeight() {
   var DOCUMENT_HEIGHT_FUDGE_FACTOR = 10; // prevent scrollbar, not sure why it's not correct without this.
   return $(document.body).outerHeight() + DOCUMENT_HEIGHT_FUDGE_FACTOR;
 }
-var oldDocumentHeight = getHeight();
+var oldDocumentHeight = undefined;
 setInterval(function() {
   var nu = getHeight();
   if (nu !== oldDocumentHeight) {
