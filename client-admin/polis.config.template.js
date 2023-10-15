@@ -18,7 +18,7 @@ module.exports = {
   FB_APP_ID: '661042417336977',
 
   //SERVICE_URL: 'http://localhost:5000',
-  SERVICE_URL: 'https://staging.polis.demdis.sk',
+  SERVICE_URL: 'https://polis.demdis.sk',
 
   UPLOADER: 'local', // alt: s3, scp
 
