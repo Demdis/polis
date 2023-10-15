@@ -103,6 +103,7 @@ img {
 }
 
 .conversationViewRoot {
+  margin-top: 1px;
   overflow: hidden; // trim carousel contents. carousel lives in an overflow: visible container, this crops it.
 }
 
