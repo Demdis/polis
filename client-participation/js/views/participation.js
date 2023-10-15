@@ -1180,7 +1180,6 @@ module.exports = ConversationView.extend({
 
           that.updateVis2();
           that.updateTopComments();
-          that.updateHeader();
 
 
           that.updateVisMode();

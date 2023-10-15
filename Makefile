@@ -13,6 +13,9 @@ help:  ## Show this help
 prod: ## Start all Docker containers
 	@docker compose up --detach
 
+build: ## Start all Docker containers
+	@docker compose build
+
 dev: ## Start all Docker containers
 	@docker compose -f docker-compose.dev.yml up --detach
 

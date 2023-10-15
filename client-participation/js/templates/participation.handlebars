@@ -42,38 +42,6 @@
     padding-right: 0px
     ">
     <div class="POLIS_HEADLINE conversationViewHeadline">
-    {{#unless useBannerHeader}}
-      {{#if showLogoAndBreadCrumbInHeader}}
-          <div class="HeadingA">
-            <a href="pol.is">
-              <img
-                width="164px"
-                src="https://pol.is/polis_logo_2.png"
-                alt=""
-                >
-            </a>
-            <a
-              style="
-                vertical-align: middle;
-                font-size: 18px;"
-              href="/s/{{context}}"
-              >
-            /s/{{context}}
-            </a>
-          </div>
-      {{else}}
-        {{#if showLogoInHeader}}
-          <div class="HeadingA">
-            <img
-              width="164px"
-              src="https://pol.is/polis_logo_2.png"
-              alt=""
-              >
-          </div>
-        {{/if}}
-      {{/if}}
-    {{/unless}}
-
     {{#if show_admin_button}}
     <div style="padding: 10px 0px 20px 0px">
 {{!--       <a
@@ -166,13 +134,12 @@
 
     {{#unless no_topic}}
     {{#ifDefined topic}}
+        {{#unless is_active}}
       <h2
         class="HeadingA"
         style="
          margin-bottom: 10px;
         ">
-        {{topic}}
-        {{#unless is_active}}
         <span class="no_you_vote" style="
          color: white;
          background-color: rgb(231, 76, 60);
@@ -185,22 +152,8 @@
          top: -5px;
          left: 6px;
         ">closed</span>
-      {{/unless}}
       </h2>
-    {{/ifDefined}}
-    {{/unless}}
-
-    {{#unless no_description}}
-    {{#ifDefined description}}
-        <p
-          style="
-            border-left: 4px solid #2980b9;
-            padding-left: 10px;
-            font-family: chaparral-pro;
-            word-wrap:break-word;
-          ">
-          {{{description}}}
-        </p>
+      {{/unless}}
     {{/ifDefined}}
     {{/unless}}
 
@@ -219,30 +172,6 @@
   </div> {{! /fake container }}
 
 {{!  ------------ BEGIN MAIN CONTENT ---------------  }}
-
-{{!  ------------ HELP TEXT ---------------  }}
-
-<div
-  id="helpTextWelcome"
-  style="
-    {{!-- background-color: {{help_bgcolor}}; --}}
-    {{!-- border: 1px solid rgb(85, 172, 238); --}}
-    {{!-- color: rgb(68, 136, 189); --}}
-    {{!-- color: {{help_color}}; --}}
-    color: black;
-    padding: 5px 0px 5px 0px;
-    font-style: italic;
-    font-family: chaparral-pro;
-  " class="
-  clickDoesNotDeselectHull
-  {{#if hideHelp}} displayNone{{/if}}
-  {{#if no_voting}} displayNone{{/if}} {{!-- this line is here because the help text references voting --}}
-  ">
-  <p
-    style="margin: 0px;"
-    >
-  </p>
-</div>
 
 {{!  ------------ SUBMIT COMMENT FORM ---------------  }}
 <span id="commentFormBSibling" style="display:none"></span>
