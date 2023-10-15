@@ -72,17 +72,14 @@ function getHeight() {
   var DOCUMENT_HEIGHT_FUDGE_FACTOR = 10; // prevent scrollbar, not sure why it's not correct without this.
   return $(document.body).outerHeight() + DOCUMENT_HEIGHT_FUDGE_FACTOR;
 }
-var oldDocumentHeight = getHeight();
-if (isEmbedded()) {
-  setInterval(function() {
-    var nu = getHeight();
-    if (nu !== oldDocumentHeight) {
-      oldDocumentHeight = nu;
-      PostMessageUtils.postResizeEvent(nu);
-    }
-  }, 200);
-}
-
+var oldDocumentHeight = undefined;
+setInterval(function() {
+  var nu = getHeight();
+  if (nu !== oldDocumentHeight) {
+    oldDocumentHeight = nu;
+    PostMessageUtils.postResizeEvent(nu);
+  }
+}, 200);
 
 function stripParams(paramsToStrip) {
   var params = Utils.decodeParams(encodedParams);
