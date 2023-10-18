@@ -20,9 +20,9 @@ services:
     container_name: polis-server
     image: demdis/server:prod
     env_file: ./server/docker-dev.env
+    restart: on-failure
     environment:
       - DATABASE_URL=${DATABASE_URL}
-    restart: always
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -38,6 +38,7 @@ services:
     container_name: polis-math
     image: demdis/math:prod
     env_file: ./math/docker-dev.env
+    restart: on-failure
     environment:
       - DATABASE_URL=${DATABASE_URL}
     depends_on:
@@ -50,6 +51,7 @@ services:
   postgres:
     container_name: polis-postgres
     image: demdis/db:prod
+    restart: on-failure
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -71,6 +73,7 @@ services:
     image: caddy:2-alpine
     environment:
       PRIMARY_POLIS_URL: ${PRIMARY_POLIS_URL}
+    restart: on-failure
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - certificates:/data/caddy
@@ -86,6 +89,7 @@ services:
     container_name: polis-file-server
     image: demdis/file-server:prod
     env_file: ./.env
+    restart: on-failure
     build:
       context: ./
       dockerfile: file-server/Dockerfile
