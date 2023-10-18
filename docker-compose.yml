@@ -18,7 +18,7 @@ version: "3.4"
 services:
   server:
     container_name: polis-server
-    image: demdis/server:prod
+    image: ghcr.io/demdis/polis-server:${VERSION}
     env_file: ./server/docker-dev.env
     restart: on-failure
     environment:
@@ -36,7 +36,7 @@ services:
 
   math:
     container_name: polis-math
-    image: demdis/math:prod
+    image: ghcr.io/demdis/polis-math:${VERSION}
     env_file: ./math/docker-dev.env
     restart: on-failure
     environment:
@@ -50,7 +50,7 @@ services:
 
   postgres:
     container_name: polis-postgres
-    image: demdis/db:prod
+    image: ghcr.io/demdis/polis-db:${VERSION}
     restart: on-failure
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
@@ -87,7 +87,7 @@ services:
 
   file-server:
     container_name: polis-file-server
-    image: demdis/file-server:prod
+    image: ghcr.io/demdis/polis-file-server:${VERSION}
     env_file: ./.env
     restart: on-failure
     build:
